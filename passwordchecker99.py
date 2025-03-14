@@ -1,3 +1,4 @@
+
 import streamlit as st
 import re
 
@@ -48,12 +49,18 @@ def password_strength(password):
     else:
         strength = "Very Strong"
 
-    # Print results
-    print(f"Password: {password}")
-    print(f"Strength: {strength}")
-    print(f"Total Score: {total_score}/5")
-    return strength
+    return strength, total_score
 
-# Example usage:
-password = input("Enter your password: ")
-password_strength(password)
+# Streamlit app
+def app():
+    st.title("Password Strength Checker")
+    
+    password = st.text_input("Enter your password:")
+    
+    if password:
+        strength, total_score = password_strength(password)
+        st.write(f"Password Strength: {strength}")
+        st.write(f"Total Score: {total_score}/5")
+
+if __name__ == "__main__":
+    app()
